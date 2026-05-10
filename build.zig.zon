@@ -1,0 +1,14 @@
+.{
+    .name = .kill_port,
+    .version = "0.1.0",
+    .fingerprint = 0x1c2d833d5dfe2e97,
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "README.md",
+        "LICENSE",
+    },
+}
