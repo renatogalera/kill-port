@@ -6,13 +6,13 @@ Native command-line tool for killing the process that is listening on a TCP or U
 
 ## Status
 
-The current implementation supports Linux and Windows.
+The current implementation supports Linux, macOS, and Windows.
 
 On Linux, it reads socket tables from `/proc/net`, resolves socket inodes through `/proc/<pid>/fd`, and sends `SIGKILL` directly to matching processes.
 
 On Windows, it uses the native IP Helper API to find the owning PID for TCP and UDP endpoints, then terminates the matching process through Win32 process APIs.
 
-macOS binaries are published for convenience, but the macOS runtime backend is not implemented yet.
+On macOS, it uses `libproc` to inspect process file descriptors, matches TCP and UDP socket metadata, and sends `SIGKILL` directly to matching processes.
 
 ## Build
 
