@@ -45,13 +45,6 @@ Tagged releases publish `.tar.gz` archives for:
 - `windows-amd64`
 - `windows-arm64`
 
-Create a release by pushing a version tag:
-
-```sh
-git tag v0.1.0
-git push origin v0.1.0
-```
-
 ## Install
 
 ```sh
