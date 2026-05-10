@@ -47,6 +47,20 @@ Tagged releases publish `.tar.gz` archives for:
 
 ## Install
 
+Linux and macOS:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/renatogalera/kill-port/main/scripts/install.sh | sh
+```
+
+Windows PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/renatogalera/kill-port/main/scripts/install.ps1 | iex
+```
+
+Build from source:
+
 ```sh
 zig build -Doptimize=ReleaseFast --prefix ~/.local
 ```
