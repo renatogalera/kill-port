@@ -26,6 +26,22 @@ Optimized build:
 zig build -Doptimize=ReleaseFast
 ```
 
+## Release Binaries
+
+Tagged releases publish `.tar.gz` archives for:
+
+- `linux-amd64`
+- `linux-arm64`
+- `macos-amd64`
+- `macos-arm64`
+
+Create a release by pushing a version tag:
+
+```sh
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ## Install
 
 ```sh
