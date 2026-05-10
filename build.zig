@@ -21,6 +21,9 @@ pub fn build(b: *std.Build) void {
             },
         }),
     });
+    if (target.result.os.tag == .windows) {
+        exe.linkSystemLibrary("iphlpapi");
+    }
 
     b.installArtifact(exe);
 
@@ -35,10 +38,16 @@ pub fn build(b: *std.Build) void {
     const lib_tests = b.addTest(.{
         .root_module = lib,
     });
+    if (target.result.os.tag == .windows) {
+        lib_tests.linkSystemLibrary("iphlpapi");
+    }
 
     const exe_tests = b.addTest(.{
         .root_module = exe.root_module,
     });
+    if (target.result.os.tag == .windows) {
+        exe_tests.linkSystemLibrary("iphlpapi");
+    }
 
     const test_step = b.step("test", "Run tests");
     test_step.dependOn(&b.addRunArtifact(lib_tests).step);

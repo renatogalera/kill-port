@@ -50,15 +50,27 @@ jobs:
           - name: linux-amd64
             target: x86_64-linux-musl
             archive: kill-port-linux-amd64
+            binary: kill-port
           - name: linux-arm64
             target: aarch64-linux-musl
             archive: kill-port-linux-arm64
+            binary: kill-port
           - name: macos-amd64
             target: x86_64-macos
             archive: kill-port-macos-amd64
+            binary: kill-port
           - name: macos-arm64
             target: aarch64-macos
             archive: kill-port-macos-arm64
+            binary: kill-port
+          - name: windows-amd64
+            target: x86_64-windows-gnu
+            archive: kill-port-windows-amd64
+            binary: kill-port.exe
+          - name: windows-arm64
+            target: aarch64-windows-gnu
+            archive: kill-port-windows-arm64
+            binary: kill-port.exe
 
     steps:
       - name: Checkout
@@ -76,7 +88,7 @@ jobs:
       - name: Package
         run: |
           mkdir -p "dist/${{ matrix.archive }}"
-          cp zig-out/bin/kill-port "dist/${{ matrix.archive }}/kill-port"
+          cp "zig-out/bin/${{ matrix.binary }}" "dist/${{ matrix.archive }}/${{ matrix.binary }}"
           cp README.md LICENSE "dist/${{ matrix.archive }}/"
           tar -C dist -czf "dist/${{ matrix.archive }}.tar.gz" "${{ matrix.archive }}"
           sha256sum "dist/${{ matrix.archive }}.tar.gz" > "dist/${{ matrix.archive }}.tar.gz.sha256"
@@ -115,4 +127,4 @@ jobs:
             dist/*.tar.gz \
             dist/*.tar.gz.sha256 \
             --title "$GITHUB_REF_NAME" \
-            --notes "Prebuilt kill-port binaries for Linux amd64, Linux arm64, macOS Intel, and macOS Apple Silicon."
+            --notes "Prebuilt kill-port binaries for Linux, macOS, and Windows."

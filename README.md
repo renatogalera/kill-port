@@ -6,7 +6,13 @@ Native command-line tool for killing the process that is listening on a TCP or U
 
 ## Status
 
-The current implementation supports Linux. It reads socket tables from `/proc/net`, resolves socket inodes through `/proc/<pid>/fd`, and sends `SIGKILL` directly to matching processes.
+The current implementation supports Linux and Windows.
+
+On Linux, it reads socket tables from `/proc/net`, resolves socket inodes through `/proc/<pid>/fd`, and sends `SIGKILL` directly to matching processes.
+
+On Windows, it uses the native IP Helper API to find the owning PID for TCP and UDP endpoints, then terminates the matching process through Win32 process APIs.
+
+macOS binaries are published for convenience, but the macOS runtime backend is not implemented yet.
 
 ## Build
 
@@ -19,6 +25,8 @@ The binary will be available at:
 ```sh
 zig-out/bin/kill-port
 ```
+
+Windows builds produce `zig-out/bin/kill-port.exe`.
 
 Optimized build:
 
@@ -34,6 +42,8 @@ Tagged releases publish `.tar.gz` archives for:
 - `linux-arm64`
 - `macos-amd64`
 - `macos-arm64`
+- `windows-amd64`
+- `windows-arm64`
 
 Create a release by pushing a version tag:
 
