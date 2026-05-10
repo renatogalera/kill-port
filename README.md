@@ -2,7 +2,7 @@
 
 Native command-line tool for killing the process that is listening on a TCP or UDP port.
 
-`kill-port` is written in Zig and ships as a single binary. There is no Node.js runtime, package manager dependency, or shell pipeline involved in the port lookup.
+`kill-port` is written in Zig and ships as a single binary.
 
 ## Status
 
