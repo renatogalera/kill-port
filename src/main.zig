@@ -1,5 +1,6 @@
 const std = @import("std");
 const kill_port = @import("kill_port");
+const build_options = @import("build_options");
 
 const Allocator = std.mem.Allocator;
 
@@ -73,7 +74,7 @@ fn run(allocator: Allocator, stdout: *std.Io.Writer, stderr: *std.Io.Writer) !u8
     }
 
     if (options.version) {
-        try stdout.print("kill-port 0.1.0\n", .{});
+        try stdout.print("kill-port {s}\n", .{build_options.version});
         return 0;
     }
 

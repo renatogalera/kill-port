@@ -34,7 +34,12 @@ jobs:
         run: zig build test
 
       - name: Build native release
-        run: zig build -Doptimize=ReleaseFast
+        run: |
+          version_arg=""
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            version_arg="-Dversion=${GITHUB_REF_NAME#v}"
+          fi
+          zig build -Doptimize=ReleaseFast $version_arg
 
   build:
     name: Build ${{ matrix.name }}
@@ -81,7 +86,12 @@ jobs:
           echo "$PWD/zig-x86_64-linux-${ZIG_VERSION}" >> "$GITHUB_PATH"
 
       - name: Build ${{ matrix.target }}
-        run: zig build -Dtarget=${{ matrix.target }} -Doptimize=ReleaseFast
+        run: |
+          version_arg=""
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            version_arg="-Dversion=${GITHUB_REF_NAME#v}"
+          fi
+          zig build -Dtarget=${{ matrix.target }} -Doptimize=ReleaseFast $version_arg
 
       - name: Package
         run: |
